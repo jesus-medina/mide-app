@@ -1,0 +1,7 @@
+{
+  "name": "Mide",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
