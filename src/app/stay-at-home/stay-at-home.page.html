@@ -1,0 +1,32 @@
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" class="ion-text-center">
+        <ion-label class="main-text">Queremos proteger a tu familia.</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" class="ion-text-center">
+        <ion-label class="main-text">Por eso, en caso de ser adulto mayor, tener síntomas o alguna enfermedad, te recomendamos que te quedes en casa.</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" class="ion-text-center">
+        <ion-label class="main-text">También implementamos un filtro de higiene a la entrada para cuidarte. El equipo capacitado para brindarte seguridad te aconsejará quedarte en casa o acompañarnos al culto.</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-button [routerLink]="['/stay-at-home']" expand="full" fill="clear" shape="round">
+          Quiero ir al culto
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer class="ion-no-border footer-for-main-action">
+  <ion-button [routerLink]="['/stay-at-home']" expand="full" fill="clear" shape="round">
+    Me quedo en casa
+  </ion-button>
+</ion-footer>
