@@ -1,0 +1,23 @@
+ion-grid {
+    padding: 4%;
+}
+
+ion-row {
+    padding: 4%;
+}
+
+#mi, #de {
+    font-size: 48pt;
+}
+
+@media (max-height: 700px) {
+    #mi, #de {
+        font-size: 36pt;
+    }
+}
+
+@media (max-height: 500px) {
+    #mi, #de {
+        font-size: 28pt;
+    }
+}

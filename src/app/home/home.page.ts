@@ -7,16 +7,8 @@ import { DataService, Message } from '../services/data.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  icon = './../../assets/icon/icon.png';
+
   constructor(private data: DataService) {}
-
-  refresh(ev) {
-    setTimeout(() => {
-      ev.detail.complete();
-    }, 3000);
-  }
-
-  getMessages(): Message[] {
-    return this.data.getMessages();
-  }
 
 }

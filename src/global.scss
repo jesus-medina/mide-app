@@ -24,3 +24,17 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+.icon-launcher {
+    width: 45%;
+    max-width: 256px;
+}
+
+.main-text {
+    font-size: 18pt;
+}
+
+.footer-for-main-action {
+    background-color: white;
+    padding: 4%;
+}
