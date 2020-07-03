@@ -23,6 +23,10 @@ const routes: Routes = [
     path: 'stay-at-home',
     loadChildren: () => import('./stay-at-home/stay-at-home.module').then( m => m.StayAtHomePageModule)
   },
+  {
+    path: 'temple-real-time',
+    loadChildren: () => import('./temple-real-time/temple-real-time.module').then( m => m.TempleRealTimePageModule)
+  },
 ];
 
 @NgModule({
