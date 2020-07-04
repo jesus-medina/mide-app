@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { DataService, Message } from '../services/data.service';
 
 @Component({
   selector: 'app-home',
@@ -9,6 +8,6 @@ import { DataService, Message } from '../services/data.service';
 export class HomePage {
   icon = './../../assets/icon/icon.png';
 
-  constructor(private data: DataService) {}
+  constructor() {}
 
 }

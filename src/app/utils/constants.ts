@@ -1,0 +1,11 @@
+const FIRESTORE_KEY_PLACES = 'places';
+const FIRESTORE_KEY_MIN = 'min';
+const FIRESTORE_KEY_MAX = 'max';
+const FIRESTORE_KEY_OCCUPIED = 'occupied';
+
+export default {
+    FIRESTORE_KEY_PLACES,
+    FIRESTORE_KEY_MIN,
+    FIRESTORE_KEY_MAX,
+    FIRESTORE_KEY_OCCUPIED,
+};
