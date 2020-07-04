@@ -7,6 +7,7 @@ export interface Reunion {
     isToday: boolean;
     description: string;
     timeToNowTime: number;
+    isEndTimeAfterNow: boolean;
 }
 
 export class ReunionImpl implements Reunion {
@@ -36,6 +37,10 @@ export class ReunionImpl implements Reunion {
 
     get timeToNowTime(): number {
         return this.startDate.timeToNowTime;
+    }
+
+    get isEndTimeAfterNow(): boolean {
+        return this.endDate.isTimeAfterNow;
     }
 }
 

@@ -3,6 +3,7 @@ export interface ReunionDate {
     hours: string;
     minutes: string;
     isToday: boolean;
+    isTimeAfterNow: boolean;
     timeToNowTime: number;
     hourWithMeridian: string;
     isSameDayThan(otherDate: ReunionDate): boolean;
@@ -30,12 +31,24 @@ export class ReunionDateImpl implements ReunionDate {
         return today.getDay();
     }
 
-    get timeToNowTime(): number {
+    private get actualTime(): number {
         const today = new Date();
         const hours = today.getHours();
         const minutes = today.getMinutes();
         const actualTime = hours + '' + minutes;
-        return Math.abs(parseInt(actualTime, 10) - parseInt(this.hours + this.minutes, 10));
+        return parseInt(actualTime, 10);
+    }
+
+    private get reunionTime(): number {
+        return parseInt(this.hours + this.minutes, 10);
+    }
+
+    get timeToNowTime(): number {
+        return this.actualTime - this.reunionTime;
+    }
+
+    get isTimeAfterNow(): boolean {
+        return this.reunionTime >= this.actualTime;
     }
 
     get hourWithMeridian(): string {

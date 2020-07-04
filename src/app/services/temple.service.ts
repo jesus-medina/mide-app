@@ -43,23 +43,33 @@ export class TempleService {
       return false;
     }
     const index = this.reunions.findIndex(reunion => reunion.isToday);
-    return index !== -1;
+    return index !== -1 && this.isEndTimeAfterNow;
   }
 
   get closestReunionDescription(): string {
-    const closestReunion = this.closestReunion;
     const closestReunionIndex = this.closestReunionIndex;
-    return orderByIndex.get(closestReunionIndex).valueOf() + ' reunión - ' + closestReunion.startHourWithMeridian;
+    const closestReunion = this.closestReunion;
+    return orderByIndex.get(closestReunionIndex).valueOf() + ' reunión - De '
+    + closestReunion.startHourWithMeridian + ' a '
+    + closestReunion.endHourWithMeridian;
   }
 
   get nextReunionDescription(): string {
+    const closestReunionIndex = this.closestReunionIndex;
     const max = this.reunions.length - 1;
-    const nextReunionIndex = this.nextReunionIndex;
-    if (nextReunionIndex < max) {
+    if (closestReunionIndex === max) {
       return '';
     }
     const nextReunion = this.nextReunion;
-    return 'Nuestra siguiente reunión reunión - ' + nextReunion.startHourWithMeridian;
+    return 'Nuestra siguiente reunión reunión - De '
+    + nextReunion.startHourWithMeridian + ' a '
+    + nextReunion.endHourWithMeridian;
+  }
+
+  private get isEndTimeAfterNow(): boolean {
+    const reunions = this.reunions;
+    const lastReunion = reunions[reunions.length - 1];
+    return lastReunion.isEndTimeAfterNow;
   }
 
   private get closestReunionIndex(): number {
@@ -67,9 +77,13 @@ export class TempleService {
       return;
     }
     const reunions = this.reunions;
-    const reunionsTimes = reunions.map(reunion => reunion.timeToNowTime);
+    const reunionsTimes = reunions.map(reunion => Math.abs(reunion.timeToNowTime));
     const minValue = Math.min(...reunionsTimes);
-    return reunions.findIndex(reunion => reunion.timeToNowTime === minValue);
+    let index = reunions.findIndex(reunion => Math.abs(reunion.timeToNowTime) === minValue);
+    if (index === -1) {
+      index = 0;
+    }
+    return index;
   }
 
   private get nextReunionIndex(): number {
@@ -120,31 +134,31 @@ export class TempleService {
       new ReunionImpl(
         new ReunionDateImpl(
           Day.friday,
-          '10:00'
+          '23:00'
         ),
         new ReunionDateImpl(
           Day.friday,
-          '11:00'
-        ),
-      ),
-      new ReunionImpl(
-        new ReunionDateImpl(
-          Day.friday,
-          '12:00'
-        ),
-        new ReunionDateImpl(
-          Day.friday,
-          '13:00'
+          '23:10'
         ),
       ),
       new ReunionImpl(
         new ReunionDateImpl(
           Day.friday,
-          '14:00'
+          '23:20'
         ),
         new ReunionDateImpl(
           Day.friday,
-          '15:00'
+          '23:30'
+        ),
+      ),
+      new ReunionImpl(
+        new ReunionDateImpl(
+          Day.friday,
+          '23:40'
+        ),
+        new ReunionDateImpl(
+          Day.friday,
+          '23:50'
         ),
       )
     ];
