@@ -21,7 +21,6 @@ export class ReunionDateImpl implements ReunionDate {
 
     private today() {
         const today = new Date();
-        console.log('today.getDay(): ' + today.getDay());
         return today.getDay();
     }
 
