@@ -53,7 +53,7 @@ export class ReunionDateImpl implements ReunionDate {
 
     get hourWithMeridian(): string {
         let hours = parseInt(this.hours, 10);
-        const isAfterMeridian = hours >= 12;
+        const isAfterMeridian = hours > 12;
         let meridian = 'a.m.';
         if (isAfterMeridian) {
             meridian = 'p.m.';

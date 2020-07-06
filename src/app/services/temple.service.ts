@@ -7,21 +7,29 @@ import { TempleFirestoreDataSource } from '../data/datasources/temple.firestore.
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Reunion } from '../domain/reunion.model';
 import { Day, ReunionDateImpl } from '../domain/reunion.date.model';
+import { interval, Observable, Subscriber } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TempleService {
 
-  temple: Temple;
+  private temple: Temple;
 
   private templeRepository: TempleRepository;
+
+  time: Observable<string> = new Observable<string>(observer => {
+    interval(1000).subscribe(() => {
+      observer.next(new Date().toString());
+      this.temple.name = new Date().toString();
+    });
+  });
 
   constructor(private readonly afs: AngularFirestore) {
     this.templeRepository = new TempleRepositoryImpl(
       new TempleLocalDataSourceImpl(),
       new TempleFirestoreDataSource(this.afs)
-    );
+      );
   }
 
   get occupiedPlaces() {
@@ -61,7 +69,7 @@ export class TempleService {
       return '';
     }
     const nextReunion = this.nextReunion;
-    return 'Nuestra siguiente reunión reunión - De '
+    return 'Nuestra siguiente reunión - De '
     + nextReunion.startHourWithMeridian + ' a '
     + nextReunion.endHourWithMeridian;
   }
@@ -133,32 +141,32 @@ export class TempleService {
     return [
       new ReunionImpl(
         new ReunionDateImpl(
-          Day.friday,
-          '23:00'
+          Day.saturday,
+          '10:00'
         ),
         new ReunionDateImpl(
-          Day.friday,
-          '23:10'
-        ),
-      ),
-      new ReunionImpl(
-        new ReunionDateImpl(
-          Day.friday,
-          '23:20'
-        ),
-        new ReunionDateImpl(
-          Day.friday,
-          '23:30'
+          Day.saturday,
+          '11:00'
         ),
       ),
       new ReunionImpl(
         new ReunionDateImpl(
-          Day.friday,
-          '23:40'
+          Day.saturday,
+          '12:00'
         ),
         new ReunionDateImpl(
-          Day.friday,
-          '23:50'
+          Day.saturday,
+          '13:00'
+        ),
+      ),
+      new ReunionImpl(
+        new ReunionDateImpl(
+          Day.saturday,
+          '14:00'
+        ),
+        new ReunionDateImpl(
+          Day.saturday,
+          '15:00'
         ),
       )
     ];

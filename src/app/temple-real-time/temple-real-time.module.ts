@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { TempleRealTimePageRoutingModule } from './temple-real-time-routing.module';
 
 import { TempleRealTimePage } from './temple-real-time.page';
+import { ThereIsNoReunionComponent } from './there-is-no-reunion/there-is-no-reunion.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,9 @@ import { TempleRealTimePage } from './temple-real-time.page';
     IonicModule,
     TempleRealTimePageRoutingModule
   ],
-  declarations: [TempleRealTimePage]
+  declarations: [
+    TempleRealTimePage,
+    ThereIsNoReunionComponent,
+  ]
 })
 export class TempleRealTimePageModule {}
