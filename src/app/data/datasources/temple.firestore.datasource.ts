@@ -15,17 +15,19 @@ export class TempleFirestoreDataSource implements TempleRemoteDataSource {
     findTempleByName(name: string): Observable<Temple> {
         return new Observable(subscriber => {
             this.afs.collection('temples').doc(name).snapshotChanges().subscribe({
-                next(snapshotAction) {
+                next: (snapshotAction) => {
                     const templeData = snapshotAction.payload.data();
-                    const placesData = templeData[Constants.FIRESTORE_KEY_PLACES];
-                    const min = placesData[Constants.FIRESTORE_KEY_MIN];
-                    const max = placesData[Constants.FIRESTORE_KEY_MAX];
-                    const occupied = placesData[Constants.FIRESTORE_KEY_OCCUPIED];
-                    const places = new Places(min, max, occupied);
+                    const primeraReunionData = templeData[Constants.FIRESTORE_KEY_PRIMERA_REUNION];
+                    const primeraReunionPlaces = this.createReunionPlacesFromReunionData(primeraReunionData);
+                    const segundaReunionData = templeData[Constants.FIRESTORE_KEY_SEGUNDA_REUNION];
+                    const segundaReunionPlaces = this.createReunionPlacesFromReunionData(segundaReunionData);
                     subscriber.next({
                         name,
                         reunions: [],
-                        places,
+                        places: [
+                            primeraReunionPlaces,
+                            segundaReunionPlaces
+                        ],
                     });
                 },
                 error(err) {
@@ -38,21 +40,16 @@ export class TempleFirestoreDataSource implements TempleRemoteDataSource {
         });
     }
 
+    private createReunionPlacesFromReunionData(reunionData: any): Places {
+        const min = reunionData[Constants.FIRESTORE_KEY_MIN];
+        const max = reunionData[Constants.FIRESTORE_KEY_MAX];
+        const occupied = reunionData[Constants.FIRESTORE_KEY_OCCUPIED];
+        const name = reunionData[Constants.FIRESTORE_KEY_NAME];
+        return new Places(min, max, occupied, name);
+    }
+
     updateOccupiedPlacesForTempleByName(name: string, occupied: number): Observable<any> {
         return new Observable(subscriber => {
-            const docRef = this.afs.collection('temples').doc(name);
-            docRef.get().toPromise().then(snapshotAction => {
-                const templeData = snapshotAction.data();
-                const placesData = templeData[Constants.FIRESTORE_KEY_PLACES];
-                placesData[Constants.FIRESTORE_KEY_OCCUPIED] = occupied;
-                docRef.update({
-                    [Constants.FIRESTORE_KEY_PLACES]: placesData,
-                }).then(() => {
-                    subscriber.complete();
-                }).catch(error => {
-                    subscriber.error(error);
-                });
-            });
         });
     }
 }

@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { ThereIsNoReunionComponent } from './there-is-no-reunion.component';
+import { ReunionComponent } from './reunion.component';
 
 describe('ThereIsNoReunionComponent', () => {
-  let component: ThereIsNoReunionComponent;
-  let fixture: ComponentFixture<ThereIsNoReunionComponent>;
+  let component: ReunionComponent;
+  let fixture: ComponentFixture<ReunionComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ThereIsNoReunionComponent ],
+      declarations: [ ReunionComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ThereIsNoReunionComponent);
+    fixture = TestBed.createComponent(ReunionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

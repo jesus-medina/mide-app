@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>{{ templeService.time | async }}</ion-title>
+    <ion-title>{{ templeService.templeName }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -19,7 +19,7 @@
     </ion-row>
     <ion-row class="ion-justify-content-center">
       <ion-col size="12" class="ion-text-center">
-        <ion-label>Para mantener la distancia, nuestra capacidad será de hasta 50 personas por reunión. No te preocupes, podrás acompañarnos a 1 de nuestras 3 reuniones semanales, o seguir la transmisión en línea.</ion-label>
+        <ion-label>Para mantener la distancia, nuestra capacidad será de hasta 100 personas por reunión. No te preocupes, podrás acompañarnos a 1 de nuestras 3 reuniones semanales, o seguir la transmisión en línea.</ion-label>
       </ion-col>
     </ion-row>
     <ion-row class="ion-justify-content-center">
@@ -31,41 +31,17 @@
 </ion-content>
 
 <ion-content>
-  <ion-grid class="main-text" *ngIf="templeService.isThereAReunionToday; else thereIsNotReunionToday" >
-    <ion-row>
-      <ion-col size="12" class="ion-text-center">
-        <ion-label>{{ templeService.closestReunionDescription }}</ion-label>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="12" class="ion-text-center">
-        <ion-label color="success" class="available-places">{{ templeService.availablePlaces }}</ion-label>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="12" class="ion-text-center">
-        <ion-label color="success">Lugares disponibles</ion-label>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="12" class="ion-text-center">
-        <ion-label color="danger" class="occupied-places">{{ templeService.occupiedPlaces }}</ion-label>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="12" class="ion-text-center">
-        <ion-label color="danger">Espacios ocupados</ion-label>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="12" class="ion-text-center">
-        <ion-label>{{ templeService.nextReunionDescription }}</ion-label>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
-  <ng-template #thereIsNotReunionToday>
-    <app-there-is-no-reunion [reunions]="templeService.reunions"></app-there-is-no-reunion>
-  </ng-template>
+  <ion-slides pager="true" [options]="slideOpts">
+    <ion-slide *ngFor="let places of templeService.availablePlaces" >
+      <app-reunion [places]="places">
+      </app-reunion>
+    </ion-slide>
+  </ion-slides>
 </ion-content>
+
+<ion-footer class="ion-no-border footer-for-main-action">
+  <ion-button href="https://docs.google.com/forms/d/e/1FAIpQLSdZZZAyN57NYL6QeZacYfkoIzf6WbvG57CLZ3SMefAnU5s9dA/viewform" expand="full" fill="clear" shape="round">
+    Confirmar mi asistencia
+  </ion-button>
+</ion-footer>
 

@@ -3,6 +3,6 @@ import { Places } from './places.model';
 
 export interface Temple {
     name: string;
-    places: Places;
+    places: Places[];
     reunions: Reunion[];
 }

@@ -8,6 +8,11 @@ import { TempleService } from '../services/temple.service';
 })
 export class TempleRealTimePage {
 
+  slideOpts = {
+    initialSlide: 0,
+    speed: 400
+  };
+
   constructor(
     public templeService: TempleService,
     ) {

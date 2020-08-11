@@ -2,8 +2,9 @@ export class Places {
     min: number;
     max: number;
     occupied: number;
+    name: string;
 
-    constructor(min: number, max: number, occupied: number) {
+    constructor(min: number, max: number, occupied: number, name: string) {
         if (min >= max) {
             throw new RangeError('Min should be lower than max');
         }
@@ -13,6 +14,7 @@ export class Places {
         this.min = min;
         this.max = max;
         this.occupied = occupied;
+        this.name = name;
     }
 
     takeAPlace() {
