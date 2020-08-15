@@ -6,7 +6,7 @@ jobs:
     working_directory: ~/mide-app
     steps:
       - checkout
-      - run: sudo npm i
+      - run: sudo npm i \ N \ N
       - run: sudo npm install -g @ionic/cli cordova-res --unsafe-perm
       - run: sudo npm install -g firebase-tools --unsafe-perm
       - run: ionic build --prod
