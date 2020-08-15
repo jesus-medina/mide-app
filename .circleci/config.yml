@@ -3,6 +3,7 @@ jobs:
   build:
     docker:
       - image: circleci/node:10
+    working_directory: ~/mide-app
     steps:
       # - run: sudo npm i
       # - run: sudo npm install -g @ionic/cli cordova-res --unsafe-perm
