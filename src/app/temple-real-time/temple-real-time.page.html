@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid id="text-content" class="main-text">
+  <ion-grid class="main-text">
     <ion-row class="ion-justify-content-center">
       <ion-col size="12" class="ion-text-center">
         <ion-label>Nuestro templo es muy grande y espacioso, así que puedes estar seguro.</ion-label>
@@ -19,7 +19,7 @@
     </ion-row>
     <ion-row class="ion-justify-content-center">
       <ion-col size="12" class="ion-text-center">
-        <ion-label>Para mantener la distancia, nuestra capacidad será de hasta 100 personas por reunión. No te preocupes, podrás acompañarnos a 1 de nuestras 3 reuniones semanales, o seguir la transmisión en línea.</ion-label>
+        <ion-label>Para mantener la distancia, nuestra capacidad será de hasta 50 personas por reunión. No te preocupes, podrás acompañarnos a 1 de nuestras 3 reuniones semanales, o seguir la transmisión en línea.</ion-label>
       </ion-col>
     </ion-row>
     <ion-row class="ion-justify-content-center">
@@ -28,9 +28,7 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-</ion-content>
-
-<ion-content>
+  
   <ion-slides pager="true" [options]="slideOpts">
     <ion-slide *ngFor="let places of templeService.availablePlaces" >
       <app-reunion [places]="places">
@@ -44,4 +42,3 @@
     Confirmar mi asistencia
   </ion-button>
 </ion-footer>
-

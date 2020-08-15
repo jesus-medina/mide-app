@@ -14,20 +14,17 @@ export class TempleFirestoreDataSource implements TempleRemoteDataSource {
 
     findTempleByName(name: string): Observable<Temple> {
         return new Observable(subscriber => {
-            this.afs.collection('temples').doc(name).snapshotChanges().subscribe({
-                next: (snapshotAction) => {
-                    const templeData = snapshotAction.payload.data();
-                    const primeraReunionData = templeData[Constants.FIRESTORE_KEY_PRIMERA_REUNION];
-                    const primeraReunionPlaces = this.createReunionPlacesFromReunionData(primeraReunionData);
-                    const segundaReunionData = templeData[Constants.FIRESTORE_KEY_SEGUNDA_REUNION];
-                    const segundaReunionPlaces = this.createReunionPlacesFromReunionData(segundaReunionData);
+            const reunions = this.afs.collection('temples').doc(name).collection('reunions');
+            reunions.snapshotChanges().subscribe({
+                next: (documentChangeActions) => {
+                    const reunions = documentChangeActions.map(documentChangeAction => {
+                        return this.createReunionPlacesFromReunionData(documentChangeAction.payload.doc.data());
+                    });
+
                     subscriber.next({
                         name,
                         reunions: [],
-                        places: [
-                            primeraReunionPlaces,
-                            segundaReunionPlaces
-                        ],
+                        places: reunions,
                     });
                 },
                 error(err) {
@@ -44,8 +41,11 @@ export class TempleFirestoreDataSource implements TempleRemoteDataSource {
         const min = reunionData[Constants.FIRESTORE_KEY_MIN];
         const max = reunionData[Constants.FIRESTORE_KEY_MAX];
         const occupied = reunionData[Constants.FIRESTORE_KEY_OCCUPIED];
-        const name = reunionData[Constants.FIRESTORE_KEY_NAME];
-        return new Places(min, max, occupied, name);
+        const reserved = reunionData[Constants.FIRESTORE_KEY_RESERVED];
+        const reunionDayOfWeek = reunionData[Constants.FIRESTORE_KEY_DAY_OF_WEEK];
+        const startTime = reunionData[Constants.FIRESTORE_KEY_START_TIME];
+        const endTime = reunionData[Constants.FIRESTORE_KEY_END_TIME];
+        return new Places(max, min, occupied, reserved, reunionDayOfWeek, startTime, endTime);
     }
 
     updateOccupiedPlacesForTempleByName(name: string, occupied: number): Observable<any> {

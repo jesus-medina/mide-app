@@ -10,7 +10,7 @@ export class TempleLocalDataSourceImpl implements TempleLocalDataSource {
         return {
             name: '',
             reunions: [],
-            places: [new Places(0, 50, 0, '')]
+            places: [new Places(50, 0, 0, 0, 0, '', '')]
         };
     }
 }
