@@ -5,10 +5,9 @@ jobs:
       - image: circleci/node:10
     working_directory: ~/mide-app
     steps:
-      # - run: sudo npm i
-      # - run: sudo npm install -g @ionic/cli cordova-res --unsafe-perm
-      # - run: sudo npm install -g firebase-tools --unsafe-perm
-      - run: pwd
-      - run: ls -la
-      # - run: ionic build --prod
-      # - run: firebase deploy
+      - checkout
+      - run: sudo npm i
+      - run: sudo npm install -g @ionic/cli cordova-res --unsafe-perm
+      - run: sudo npm install -g firebase-tools --unsafe-perm
+      - run: ionic build --prod
+      - run: firebase deploy
